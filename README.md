@@ -1,2 +1,2 @@
 # Golang-LeetCode
-leetcode solution in Golang - ByteDance
+leetcode solution in Golang
