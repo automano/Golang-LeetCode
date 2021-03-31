@@ -6,24 +6,22 @@
 
 // @lc code=start
 func climbStairs(n int) int {
-	// 记忆化递归
-	// 把中间计算过的子问题结果保存下来 map[n] = f(n) // map[int]int
-	var tmpMap = make(map[int]int)
-	return climbStairsHelper(0,n,tmpMap)
-}
-
-func climbStairsHelper(i int, n int, tmpMap map[int]int) int{
-	if i == n {
-		return 1;
+	//动态规划
+	// 转移方程 dp(n) = dp(n - 1) + dp(n - 2)
+	// 边界条件 dp(1) = 1 , dp(2) = 2
+	// 没有必要使用dp数据，当前状态只跟前两个状态有关，保存为两个变量
+	if n <= 3 {
+		return n
 	}
-	if i > n {
-		return 0;
+	var prevprev = 1 // dp(1)
+	var prev = 2 // dp(2)
+	var cur = 0 // dp[n]
+	for i := 3; i <= n; i++ {
+		cur = prevprev + prev
+		prevprev = prev
+		prev = cur
 	}
-	// 没有被访问过
-	if tmpMap[i] == 0 {
-		tmpMap[i] = climbStairsHelper(i + 1, n, tmpMap) + climbStairsHelper(i + 2, n, tmpMap)		
-	}
-	return tmpMap[i]	
+	return cur	
 }
 // @lc code=end
 
