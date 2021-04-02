@@ -6,18 +6,21 @@
 
 // @lc code=start
 func twoSum(nums []int, target int) []int {
-	// 1.暴力解法
-	// 两层for循环遍历数组，nums[i] + nums[j] = target? 
-	result := make([]int,2) 
+	// 使用一个哈希映射 map[int] int 来存 key->nums[i], value->i
+	// 把循环缩减到1次
+	result := make([]int,2)
+	tempMap := make(map[int]int)
 	for i := 0; i < len(nums); i++ {
-		for j := i + 1; j < len(nums); j++ {  //不能重复
-			if nums[i] + nums[j] == target {
-				result[0] = i
-				result[1] = j
-			}
+		// 判断tempMap中是否存在 target - nums[i] 的key
+		// 如果存在, i,tempMap[target - nums[i]] ->result
+		// 如果不存在，tempMap[num[i]] = i
+		if val, ok := tempMap[target - nums[i]]; ok {
+			result[0] = i
+			result[1] = val
 		}
+		tempMap[nums[i]] = i
 	}
-	return result;
+	return result
 }
 // @lc code=end
 

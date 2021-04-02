@@ -9,6 +9,7 @@ func climbStairs(n int) int {
 	// 动态规划优化
 	// 不用dp[]来存状态，因为只跟前两个状态有关
 	// 只需要两个变量来保存
+	// O(N)
 	if n < 3{
 		return n
 	}
