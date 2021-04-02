@@ -6,19 +6,19 @@
 
 // @lc code=start
 func plusOne(digits []int) []int {
-	// 普通情况，末尾无进位， 4,6 -> 4,7
-	// 末尾有进位 // 进位会中断， 4,9,9 -> 5,0,0
-				// 进位不会中断， 9,9 ->  1,0,0	
-	// 从末尾开始处理
-	for i := len(digits) - 1; i >= 0; i--{
-		digits[i] += 1 // +1
-		digits[i] %= 10 // 处理进位
-		if digits[i] != 0{
+	// 1. 末位+1不需要进位，[4,6] -> [4,7]
+	// 2. 末位+1需要进位，中间会停止进位，[4,9,9]->[5,0,0]
+	// 3. 末位+1需要进位，不会停止，[9,9] -> [1,0,0]
+
+	// 从末尾开始
+	for i := len(digits) - 1; i >= 0; i-- {
+		digits[i] ++ // +1
+		digits[i] %= 10 // 如果进位要变成0，对10取模
+		if digits[i] != 0 { // 不再需要进位 
 			return digits
 		}
 	}
-	// 处理全9的情况
-	return append([]int{1},digits...)
+	return append([]int{1},digits...) //[1] [0,0]
 }
 // @lc code=end
 
