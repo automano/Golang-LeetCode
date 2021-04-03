@@ -13,20 +13,28 @@
  * }
  */
 func swapPairs(head *ListNode) *ListNode {
-	// 递归解法
-	// 1. 返回值：完成交换的子链表 （除去当前正在考虑的两个节点）
-	// 2. 调用单元： 当前的组合 head和next. head -> 子链表， next -> head 完成了当前单元的交换
-	// 3. 终止条件： head -> null 没有节点了 head.Next -> null 奇数个节点的情况
-	
-	if head == nil || head.Next == nil {
-		return head
+	// 迭代解法
+	// 初始化 dummyHead -> head  (node1)
+	// 交换时 temp -> node2 (node1.Next)
+	//       node1 -> node3 (node2.Next)
+	//       node2 -> node1
+	// 移动temp == node1
+	// 终止 temp -> nil 或者temp.Next -> nil
+	// 返回 dummyHead.Next
+	dummyHead := &ListNode{0,head} // 如何初始化一个结构体
+	temp := dummyHead
+	for temp.Next != nil && temp.Next.Next != nil {
+		// 定义交换单元
+		node1 := temp.Next
+		node2 := temp.Next.Next
+		// 开始交换
+		temp.Next = node2
+		node1.Next = node2.Next
+		node2.Next = node1
+		// 移动temp
+		temp = node1
 	}
-	next := head.Next
-	// 开始当前单元的交换
-	head.Next = swapPairs(next.Next)
-	next.Next = head
-	// 完成当前单元的交换
-	return next 
+	return dummyHead.Next
 }
 // @lc code=end
 
