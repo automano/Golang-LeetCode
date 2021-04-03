@@ -6,10 +6,7 @@
 
 // @lc code=start
 func moveZeroes(nums []int)  {
-	// 双指针，快慢指针
-	if nums == nil {
-		return
-	}
+	// 快慢双指针
 	j := 0
 	for i := 0; i < len(nums); i++{
 		if nums[i] != 0 {

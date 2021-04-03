@@ -6,20 +6,20 @@
 
 // @lc code=start
 func maxArea(height []int) int {
-	// 双指针法 - 缩小搜索空间
-	// i 左边界 j 右边界
-	// 当左边界高度小于右边界的时候，移动右边界，面积只会减小，此时面积由左边界决定是否会增大，所以要移动左边。
-	// 当左边界高度大于右边界的时候，移动左边界，面积只会减小，此时面积由右边界决定时候会增大，所以要移动右边。
-	max := 0
+	// 1. 暴力解法 维护一个面积最大值，两层for循环，求两个柱子之间的面积，更新面积最大值，最后输出
+	// 时间复杂度 O(n^2) -> 超时
+	// 2. 双指针 维护左右两个指针，起始位置左右边界 时间复杂度是O(n)
+	// 如果左指针对应的高度小于右指针的，面积受限于左指针的高度，没有增大的可能。这三种情况下就没有必要移动右指针，只需要移动左指针。
+
 	i := 0
 	j := len(height) - 1
+	max := 0 // 记录面积最大值
 	for i < j {
-		if computeArea(min(height[i],height[j]),(j - i)) > max {
-			max = computeArea(min(height[i],height[j]),(j - i))
+		if (j - i)*min(height[i],height[j]) > max {
+			max = (j - i)*min(height[i],height[j]) // 更新面积最大值
 		}
-		// 移动指针
 		if height[i] < height[j] {
-			i ++
+			i++
 		} else {
 			j--
 		}
@@ -27,18 +27,12 @@ func maxArea(height []int) int {
 	return max
 }
 
-// 求最小值
 func min(a,b int) int {
 	if a >= b {
 		return b
 	} else {
 		return a
 	}
-}
-
-// 计算面积
-func computeArea(a,b int) int {
-	return a * b
 }
 // @lc code=end
 
