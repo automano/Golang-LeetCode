@@ -26,3 +26,25 @@
 5. 第五遍：
    - 面试前一周恢复性训练
 
+## 时间复杂度
+### 定义
+   - O(1): Constant Complexity 常数复杂度
+   - O(log n): Logarithmic Complexity 对数复杂度
+   - O(n): Linear Complexity 线性时间复杂度
+   - O(n^2): N square Complexity 平方
+   - O(n^3): N cubic Complexity 立方
+   - O(2^n): Exponential Growth 指数
+   - O(n!): Factorial 阶乘
+### 特殊
+   - 二叉树遍历 - 前序、中序、后序：O(N)
+   - 图的遍历：O(N)
+   - 搜索算法：DFS、BFS - O(N)
+   - 二分查找：O(logN)
+
+## 数组
+## 链表
+## 跳表
+## 栈
+## 队列
+## 双端队列
+## 优先队列
