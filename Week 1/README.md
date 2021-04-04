@@ -41,10 +41,63 @@
    - 搜索算法：DFS、BFS - O(N)
    - 二分查找：O(logN)
 
-## 数组
-## 链表
-## 跳表
-## 栈
-## 队列
-## 双端队列
-## 优先队列
+## 第3课 
+### 数组
+
+   https://golang.google.cn/ref/spec#Array_types
+
+   https://golang.google.cn/ref/spec#Slice_types
+
+   - Array 在 golang中 a := [2]int 长度不可变，数组在内存中具有连续的地址
+   - 更多的是使用切片，切片是一个结构体，（长度，容量，指向底层数组的指针），类似一个“可变”数组 a := make([]int,2)
+### 链表
+
+golang中官方提供的package中有一个对双向链表的实现 
+
+https://golang.google.cn/pkg/container/list/
+
+prepend O(1)
+
+append O(1)
+
+lookup O(n)
+
+insert O(1)
+
+delete O(1)
+
+LeetCode设计链表 https://leetcode-cn.com/problems/design-linked-list/
+
+### 跳表
+利用索引，一种升级维度的思想，用空间换时间
+
+- 只能用于元素有序的情况。
+- 对标的是平衡树（AVL Tree）和二分查找，是一种 插入/删除/搜索 都是 O(log n) 的数据结构
+- 应用于Redis
+
+跳表简介 https://www.jianshu.com/p/fef9817cc943
+
+LeetCode设计跳表 https://leetcode-cn.com/problems/design-skiplist/
+
+## 第4课
+### 栈
+- Stack：先入后出；添加、删除皆为 O(1)
+- 栈是一个 LIFO 数据结构。通常，插入操作在栈中被称作入栈 push 。与队列类似，总是在堆栈的末尾添加一个新元素。但是，删除操作，退栈 pop ，将始终删除队列中相对于它的最后一个元素
+
+LeetCode用栈实现队列 https://leetcode-cn.com/problems/implement-queue-using-stacks/
+  
+### 队列
+- Queue：先入先出；添加、删除皆为 O(1)
+
+LeetCode 设计循环队列 https://leetcode-cn.com/problems/design-circular-queue/
+
+LeetCode 用队列实现栈 https://leetcode-cn.com/problems/implement-stack-using-queues/
+### 双端队列
+
+- 两端可以进出的 Queue Deque - double ended queue
+- 插入和删除都是 O(1) 操作
+  
+### 优先队列
+
+golang 使用官方包container/heap实现优先队列
+https://golang.google.cn/pkg/container/heap/
