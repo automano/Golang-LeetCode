@@ -21,7 +21,7 @@ map https://golang.google.cn/ref/spec#Map_types
 Go 语言运行时同时使用了多个数据结构组合表示哈希表，其中 runtime.hmap 是最核心的结构体
 https://draveness.me/golang/docs/part2-foundation/ch03-datastructure/golang-hashmap/#33-%E5%93%88%E5%B8%8C%E8%A1%A8
 
-```
+```golang
 type hmap struct {
 	count     int
 	flags     uint8
@@ -111,3 +111,42 @@ golang中package提供了 https://golang.google.cn/pkg/container/heap/
 - Delete Max
   - 讲堆尾的元素替换到顶部
   - 依次从根部向下调整 HedapifyDown
+
+### 图
+- Vertices
+  - 度：入度和出度
+  - 是否连通
+- Edges
+  - 有向和无向
+  - 权重
+
+邻接矩阵和邻接链表
+
+常见的算法
+- DFS 要注意不要忘记visited集合
+``` python
+visited = set() # 和树中的DFS最大区别
+def dfs(node, visited):
+    if node in visited: # terminator
+        # already visited 
+        return 
+    visited.add(node) 
+    # process current node here. 
+...
+    for next_node in node.children(): 
+        if not next_node in visited: 
+            dfs(next_node, visited)
+```
+- BFS
+```python
+def BFS(graph, start, end):
+    queue = [] 
+    queue.append([start]) 
+    visited = set() # 和树中的BFS的最大区别
+    while queue: 
+        node = queue.pop() 
+        visited.add(node)
+        process(node) 
+        nodes = generate_related_nodes(node) 
+        queue.push(nodes)
+```

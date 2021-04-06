@@ -13,28 +13,29 @@
  * }
  */
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-	// 2. 迭代
-	// 哨兵节点 dummyHead
+	// 2.迭代解法
 	dummyHead := &ListNode{}
-	temp := dummyHead
+	tempNode := dummyHead
 	for l1 != nil && l2 != nil {
-		if l1.Val < l2.Val{
-			temp.Next = l1 // 构建合并链表
-			l1 = l1.Next 	// 把已被连接的节点移除掉
+		if l1.Val <= l2.Val {
+			tempNode.Next = l1
+			l1 = l1.Next
 		} else {
-			temp.Next = l2
+			tempNode.Next = l2
 			l2 = l2.Next
 		}
-		// 移动temp
-		temp = temp.Next		
+		tempNode = tempNode.Next
 	}
+
 	if l1 == nil {
-		temp.Next = l2
+		tempNode.Next = l2
 	}
 	if l2 == nil {
-		temp.Next = l1
+		tempNode.Next = l1
 	}
+
 	return dummyHead.Next
 }
+
 // @lc code=end
 
