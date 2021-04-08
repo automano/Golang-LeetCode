@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode.cn id=94 lang=golang
+ * @lc app=leetcode.cn id=144 lang=golang
  *
- * [94] 二叉树的中序遍历
+ * [144] 二叉树的前序遍历
  */
 
 // @lc code=start
@@ -13,19 +13,19 @@
  *     Right *TreeNode
  * }
  */
-func inorderTraversal(root *TreeNode) []int {
+func preorderTraversal(root *TreeNode) []int {
 	result := []int{}
-	var inorder func(node *TreeNode)
-	inorder = func(node *TreeNode) {
+	var preorder func(node *TreeNode)
+	preorder = func(node *TreeNode) {
 		if node == nil {
 			return
 		}
-		inorder(node.Left)
 		result = append(result, node.Val)
-		inorder(node.Right)
+		preorder(node.Left)
+		preorder(node.Right)
 		return
 	}
-	inorder(root)
+	preorder(root)
 	return result
 }
 
