@@ -1,6 +1,12 @@
 # Golang-LeetCode
 leetcode solution in Golang
 
+## B站频道
+
+记录每日一题刷题过程
+
+https://space.bilibili.com/347854795/channel/detail?cid=176951
+
 ## 刷题方法
 五毒神掌 - 五遍刷题法 (切记题目只做一遍！！！)
 1. 第一遍：
