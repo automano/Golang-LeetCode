@@ -54,3 +54,19 @@ def divide_conquer(problem, param1, param2, ...):
  
  # revert the current level states
  ```
+### 回溯算法
+
+当题目中出现 “所有组合” 等类似字眼时，我们第一感觉就要想到用回溯
+
+```
+// 模板
+result = []
+def backtrack(路径, 选择列表):
+    if 满足结束条件:
+        result.add(路径)
+        return
+    for 选择 in 选择列表:
+        做选择
+        backtrack(路径, 选择列表)
+        撤销选择
+```
