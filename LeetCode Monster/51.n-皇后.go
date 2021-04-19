@@ -3,49 +3,50 @@
  *
  * [51] N 皇后
  */
-var solutions [][]string
-
 func solveNQueens(n int) [][]string {
-	solutions = [][]string{}
+	// 回溯算法
+	// result = []
+	// def backtrack(路径, 选择列表):
+	//     if 满足结束条件:
+	//         result.add(路径)
+	//         return
+	//     for 选择 in 选择列表:
+	//         做选择
+	//         backtrack(路径, 选择列表)
+	//         撤销选择
+	// 结果
+	result := [][]string{}
+	// queens所在的行
 	queens := make([]int, n)
 	for i := 0; i < n; i++ {
 		queens[i] = -1
 	}
+	// queens所在的列
 	columns := map[int]bool{}
+	// queens所在的对角线
 	diagonals1, diagonals2 := map[int]bool{}, map[int]bool{}
-	backtrack(queens, n, 0, columns, diagonals1, diagonals2)
-	return solutions
-}
-
-func backtrack(queens []int, n, row int, columns, diagonals1, diagonals2 map[int]bool) {
-	// 行数到n意味着找到所有N皇后
-	if row == n {
-		board := generateBoard(queens, n)
-		solutions = append(solutions, board)
-		return
+	var dfs func(row int)
+	dfs = func(row int) {
+		if n == row {
+			result = append(result, generateBoard(queens, n))
+		}
+		for i := 0; i < n; i++ {
+			// 做选择
+			if columns[i] || diagonals1[row-i] || diagonals2[row+i] {
+				continue
+			}
+			queens[i] = 0
+			columns[i], diagonals1[row-i], diagonals2[row+i] = true, true, true
+			dfs(row + 1)
+			// 撤销选择
+			queens[i] = -1
+			delete(columns, i)
+			delete(diagonals1, row-i)
+			delete(diagonals2, row+i)
+		}
 	}
-	for i := 0; i < n; i++ {
-		// 该列已有queen占据
-		if columns[i] {
-			continue
-		}
-		// 主对角线已经被占据
-		if diagonals1[row-i] {
-			continue
-		}
-		// 副对角线已经被占据
-		if diagonals2[row+i] {
-			continue
-		}
-		queens[row] = i
-		columns[i] = true
-		diagonals1[row-i], diagonals2[row+i] = true, true
-		backtrack(queens, n, row+1, columns, diagonals1, diagonals2)
-		queens[row] = -1
-		delete(columns, i)
-		delete(diagonals1, row-i)
-		delete(diagonals2, row+i)
-	}
+	dfs(0)
+	return result
 }
 
 func generateBoard(queens []int, n int) []string {
