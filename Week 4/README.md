@@ -77,3 +77,22 @@ def BFS(graph, start, end):
 
 - 何种情况下用到贪心算法：问题能够分解成子问题来解决，子问题的最优解能递推到最终问题的最优解。这种子问题最优解称为最优子结构。
 
+### 二分查找
+#### 前提
+   1. 目标函数单调
+   2. 存在上下界
+   3. 能过够通过索引访问
+
+#### 模板
+``` python
+left,right = 0,len(array) - 1
+while left <= right:
+    mid = (left + right) / 2
+    if array[mid] == target:
+        # find the target!!
+        break or return result
+        elif array[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+```
