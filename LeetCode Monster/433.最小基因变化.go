@@ -6,29 +6,36 @@
 
 // @lc code=start
 func minMutation(start string, end string, bank []string) int {
-	// bank []string 放入hashmap中
-	bankMap := make(map[string]int)
-	for i, s := range bank {
-		bankMap[s] = i
+	base := [4]byte{'A', 'C', 'G', 'T'}
+	hashGenBank := make(map[string]bool, len(bank))
+	for _, gen := range bank {
+		hashGenBank[gen] = true
 	}
-	// 判断bank中是否存在目标基因序列
-	if _, exist := bankMap[end]; !exist {
-		return -1
-	}
-	// 初始化
-	mutationMap := map[byte][]byte{
-		'A':[]byte{'C',''}
-	}
-	step := 0
 	queue := []string{start}
-	// 如果start在bank中，则将其移除
-	if _, exist := bankMap[start]; exist {
-		delete(bankMap, start)
-	}
-	for len(queue) > 0 {
-		step++
+	minLevel := 0
+	// BFS
+	for len(queue) != 0 {
+		queueSize := len(queue)
+		for i := 0; i < queueSize; i++ {
+			gen := queue[0]
+			queue = queue[1:]
+			if gen == end {
+				return minLevel
+			}
 
+			for g := 0; g < len(gen); g++ {
+				for j := 0; j < 4; j++ {
+					newGen := gen[:g] + string(base[j]) + gen[g+1:]
+					if hashGenBank[newGen] {
+						queue = append(queue, newGen)
+						hashGenBank[newGen] = false
+					}
+				}
+			}
+		}
+		minLevel++
 	}
+	return -1
 }
 
 // @lc code=end
