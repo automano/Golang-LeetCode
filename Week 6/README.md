@@ -139,3 +139,11 @@ https://leetcode-cn.com/problems/palindromic-substrings/
 https://leetcode-cn.com/problems/minimum-window-substring/
 
 https://leetcode-cn.com/problems/burst-balloons/
+
+#### 做题总结
+动态规划的的四个解题步骤是：
+
+1. 定义子问题
+2. 写出子问题的递推关系
+3. 确定 DP 数组的计算顺序
+4. 空间优化（可选）
