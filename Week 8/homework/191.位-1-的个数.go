@@ -1,0 +1,18 @@
+/*
+ * @lc app=leetcode.cn id=191 lang=golang
+ *
+ * [191] 位1的个数
+ */
+
+// @lc code=start
+func hammingWeight(num uint32) int {
+	cnt := 0
+	for num != 0 {
+		num = num & (num - 1) // 消除二进制数中最后一个1
+		cnt++                 // 记录该操作的次数
+	}
+	return cnt
+}
+
+// @lc code=end
+
