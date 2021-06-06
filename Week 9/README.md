@@ -33,7 +33,7 @@
 
 布隆过滤器（Bloom Filter）的核心实现是一个超大的位数组和几个哈希函数。假设位数组的长度为m，哈希函数的个数为k
 
-![配图](\img\Snipaste_2021-06-03_23-41-54.png)
+![配图](.\img\Snipaste_2021-06-03_23-41-54.png)
 
 具体的操作流程：假设集合里面有3个元素{x, y, z}，哈希函数的个数为3。首先将位数组进行初始化，将里面每个位都设置位0。对于集合里面的每一个元素，将元素依次通过3个哈希函数进行映射，每次映射都会产生一个哈希值，这个值对应位数组上面的一个点，然后将位数组对应的位置标记为1。查询W元素是否存在集合中的时候，同样的方法将W通过哈希映射到位数组上的3个点。如果3个点的其中有一个点不为1，则可以判断该元素一定不存在集合中。反之，如果3个点都为1，则该元素可能存在集合中。注意：此处不能判断该元素是否一定存在集合中，可能存在一定的误判率。可以从图中可以看到：假设某个元素通过映射对应下标为4，5，6这3个点。虽然这3个点都为1，但是很明显这3个点是不同元素经过哈希得到的位置，因此这种情况说明元素虽然不在集合中，也可能对应的都是1，这是误判率存在的原因。
 
@@ -93,7 +93,52 @@ LRU 缓存机制可以通过哈希表辅以双向链表实现，我们用一个�
 
 见Leet Code题目 
 
-- 146. LRU 缓存机制 https://leetcode-cn.com/problems/lru-cache/
+- LRU 缓存机制 https://leetcode-cn.com/problems/lru-cache/
 
 
-###
+## 第九周 - 第十八课 - 排序算法
+
+### Implementation For The Sort Algorithms In Golang
+
+https://www.tutorialdocs.com/article/golang-sort-algorithms.html
+
+### 各种排序算法动画展示
+
+https://www.cnblogs.com/onepixel/p/7674659.html
+
+#### O (N2) -- The comparison-based sort algorithms
+- Bubble sort (BUB)
+- Selection sort (SEL)
+- Insert sort (INS)
+  
+The comparison-based sort algorithms compare the elements of the array and then decide whether to swap them. These three sorting algorithms are the easiest ones to implement, but are not the most efficient, because their time complexity is O (N2).
+
+#### O (NlogN) -- The comparison-based sort algorithms
+- Heap sort
+- Shell Sort (SHE)
+- Merge sort (MER)
+- Quick sort (QUI)
+- Random Quick Sort (R-Q)
+- These sorting algorithms are usually implemented recursively.
+
+#### O (N) -- The sort algorithms not based on comparison
+- Counting sort (COU)
+- Bucket sort (BUC)
+- Radix Sort (RAD)
+
+#### Complexity and stability
+
+![配图](.\img\Snipaste_2021-06-06_00-10-56.png)
+
+#### Bublle Sort 冒泡排序
+```golang
+func BubbleSort(data []int) {
+	for i := 0; i < len(data); i++ {
+		for j := 1; j < len(data)-i; j++ {
+			if data[j] < data[j-1] {
+				data[j], data[j-1] = data[j-1], data[j]
+			}
+		}
+	}
+}
+```
